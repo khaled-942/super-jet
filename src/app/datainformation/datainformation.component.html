@@ -1,0 +1,137 @@
+<div class="card flex justify-content-center">
+  <p-button (click)="showDialog()" icon="pi pi-external-link" label="عربة جديدة"></p-button>
+
+  <p-dialog header="Header" [modal]="true" dir="rtl" *ngIf="dataForm" [(visible)]="dataForm" [draggable]="false" [maximizable]="true"
+    [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '95vw' }">
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">أضافة عربة جديدة</span>
+    </ng-template>
+    <form [formGroup]="busData" (ngSubmit)="confirm()">
+      <div class="flex flex-1 align-items-center justify-content-center gap-2">
+        <div class="card flex justify-content-center py-5">
+          <span class="p-float-label">
+            <input pInputText class="p-inputtext-sm" id="arabicname" type="text" formControlName="arName" />
+            <label htmlFor="arabicname">نوع الحافلة باللغة العربية</label>
+          </span>
+        </div>
+        <div class="card flex justify-content-center py-5">
+          <span class="p-float-label">
+            <input pInputText class="p-inputtext-sm" id="englishname" type="text" formControlName="enName" />
+            <label htmlFor="englishname">نوع الحافلة باللغة الانجليزية</label>
+          </span>
+        </div>
+        <div class="card flex justify-content-center py-5">
+          <span class="p-float-label">
+            <input pInputText class="p-inputtext-sm" id="rownumber" pKeyFilter="int" formControlName="rowNu" />
+            <label htmlFor="rownumber">عدد الصفوف</label>
+          </span>
+        </div>
+        <div class="card flex justify-content-center py-5">
+          <span class="p-float-label">
+            <input pInputText class="p-inputtext-sm" id="columnnumber" pKeyFilter="int" formControlName="colNu" />
+            <label htmlFor="columnnumber">عدد الاعمدة</label>
+          </span>
+        </div>
+        <div class="card flex justify-content-center py-5">
+          <span class="p-float-label">
+            <input pInputText class="p-inputtext-sm" id="seatsnumber" pKeyFilter="int" formControlName="seatNu" />
+            <label htmlFor="seatsnumber">عدد المقاعد</label>
+          </span>
+        </div>
+        <div class="card flex justify-content-center py-5">
+          <span class="p-float-label">
+            <input pInputText class="p-inputtext-sm" id="levelnumber" pKeyFilter="int" formControlName="levNu" />
+            <label htmlFor="levelnumber">عدد المستويات</label>
+          </span>
+        </div>
+        <div class="card flex justify-content-center">
+          <button pButton pRipple label="تاكيد" icon="pi pi-check" class="p-button-success flex-row-reverse"></button>
+        </div>
+      </div>
+    </form>
+    <ng-template pTemplate="footer">
+      <div class="card flex justify-content-center">
+        <button pButton pRipple label="الغاء" icon="pi pi-check" (click)="dataForm=false"
+          class="p-button-danger flex-row-reverse"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog header="Header" dir="rtl" [modal]="true" *ngIf="confirmData" [(visible)]="confirmData" [draggable]="false" [maximizable]="true"
+    [style]="{ width: '50vw' }">
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">تاكيد عربة جديدة</span>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="card flex justify-content-center">
+        <button pButton pRipple label="confirm" icon="pi pi-check" (click)="switchDialog()"
+          class="p-button-success flex-row-reverse"></button>
+        <button pButton pRipple label="الغاء" icon="pi pi-check" (click)="confirmData=false"
+          class="p-button-danger flex-row-reverse"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+  <p-dialog header="Header" [modal]="true" dir="rtl" *ngIf="showData" [(visible)]="showData" [draggable]="false" [maximizable]="true"
+    [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '95vw' }">
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">أضافة عربة جديدة</span>
+    </ng-template>
+    <form [formGroup]="busData" (ngSubmit)="confirm()">
+      <div class="flex flex-1 align-items-end justify-content-center gap-2">
+        <div class="card flex justify-content-center">
+          <span class="flex flex-column gap-2">
+            <label htmlFor="arabicname">نوع الحافلة باللغة العربية</label>
+            <input pInputText class="p-inputtext-sm" formControlName="arName" id="arabicname" type="text" [value]="controls.arName.value"
+              [disabled]="disVal" />
+          </span>
+        </div>
+        <!-- <div class="card flex justify-content-center">
+          <span class="flex flex-column gap-2">
+            <label htmlFor="englishname">نوع الحافلة باللغة الانجليزية</label>
+            <input pInputText class="p-inputtext-sm" [value]="controls.enName.value" [disabled]="disVal"
+              id="englishname" type="text" />
+          </span>
+        </div>
+        <div class="card flex justify-content-center">
+          <span class="flex flex-column gap-2">
+            <label htmlFor="rownumber">عدد الصفوف</label>
+            <input pInputText class="p-inputtext-sm" [value]="controls.rowNu.value" [disabled]="disVal" id="rownumber"
+              pKeyFilter="int" />
+          </span>
+        </div>
+        <div class="card flex justify-content-center">
+          <span class="flex flex-column gap-2">
+            <label htmlFor="columnnumber">عدد الاعمدة</label>
+            <input pInputText class="p-inputtext-sm" [value]="controls.colNu.value" [disabled]="disVal"
+              id="columnnumber" pKeyFilter="int" />
+          </span>
+        </div>
+        <div class="card flex justify-content-center">
+          <span class="flex flex-column gap-2">
+            <label htmlFor="seatsnumber">عدد المقاعد</label>
+            <input pInputText class="p-inputtext-sm" [value]="controls.seatNu.value" [disabled]="disVal"
+              id="seatsnumber" pKeyFilter="int" />
+          </span>
+        </div>
+        <div class="card flex justify-content-center">
+          <span class="flex flex-column gap-2">
+            <label htmlFor="levelnumber">عدد المستويات</label>
+            <input pInputText class="p-inputtext-sm" [value]="controls.levNu.value" [disabled]="disVal" id="levelnumber"
+              pKeyFilter="int" />
+          </span>
+        </div> -->
+        <div class="card flex justify-content-center">
+          <p-toggleButton  (click)="switchDis()" icon="pi pi-check" onLabel="تاكيد"
+            offLabel="تعديل" class="p-button-success flex-row-reverse"></p-toggleButton>
+        </div>
+      </div>
+    </form>
+    <ng-template pTemplate="footer">
+      <div class="card flex justify-content-center">
+        <button pButton pRipple label="الغاء" icon="pi pi-check" (click)="showData=false"
+          class="p-button-danger flex-row-reverse"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+</div>
